@@ -9,9 +9,6 @@ Fetches public IP information from ipinfo.io for one or more IPs.
 - curl
 - bc
 
-**Changes in 1.1.0:**
-- Added a check to ensure required commands (`curl`, `bc`) are installed before execution.
-
 **Usage:**
 ```sh
 Usage: ./ipinfo.sh [OPTIONS] <ip1> [ip2,ip3 ...]
@@ -31,9 +28,13 @@ Examples:
 
 ---
 
-## port_check.sh
+## port_check
 
-A comprehensive script to check for open TCP and UDP ports on a target host. It uses `nmap` for powerful scanning and `nc` (netcat-openbsd) for quick, individual port checks. The script can check both IPv4, IPv6 addresses, or using a domain name.
+A tool to check for open TCP and UDP ports on a target host. Available as a shell script or a self-contained Go program.
+
+### port_check.sh
+
+A comprehensive script that uses `nmap` and `nc` (netcat-openbsd) for scanning.
 
 **Prequisites:**
 - nmap
@@ -53,13 +54,62 @@ Options:
 Targets:
   IPv4 address     Direct IPv4 target
   IPv6 address     Direct IPv6 target
-  Domain name       Will resolve to both IPv4 and IPv6 automatically
+  Domain name      Will resolve to both IPv4 and IPv6 automatically
 
 Examples:
   ./port_check.sh -p 80,443 example.com
   ./port_check.sh --port 80,443 1.1.1.1
   ./port_check.sh -p 22,80,443 2606:4700:4700::1111
-  ./port_check.sh -v -p 80,443 example.com
+```
+
+### port_check.go
+
+A self-contained Go program with no external dependencies.
+
+**Prequisites:**
+- Go (for building or running from source)
+
+**Usage:**
+
+You can run the program directly using `go run` or build a compiled executable.
+
+**1. Run directly:**
+```sh
+go run ./port_check.go [OPTIONS] <target>
+```
+
+**2. Build the executable:**
+You can easily compile binaries for other operating systems from any machine with Go installed. This assume to run from the 'tools-and-scripts/scripts' directory.
+
+```sh
+# For Windows
+go build -ldflags="-s -w" -o port_check.exe ./port_check.go
+
+# For Linux
+GOOS=linux GOARCH=amd64 go build -o port_check ./port_check.go
+
+# For macOS (Apple Silicon)
+GOOS=darwin GOARCH=arm64 go build -o port_check ./port_check.go
+```
+
+Then run the compiled executable:
+```sh
+# Windows
+./port_check.exe [OPTIONS] <target>
+# Linux or MacOS
+./port_check [OPTIONS] <target>
+```
+
+**Options:**
+```
+  -p, --port       Port numbers (comma-separated, e.g., 80,443,3306)
+  -h, --help       Show this help message
+```
+
+**Examples:**
+```sh
+go run ./port_check.go -p 80,443 example.com
+./port_check.exe -p 80,443 1.1.1.1
 ```
 
 ---
