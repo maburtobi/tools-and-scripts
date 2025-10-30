@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2025-10-30
+
+### Added
+- **`port_check.sh` to `port_check.go`**: The port checking script has been completely rewritten in Go. It is now a self-contained executable with no external dependencies.
+
 ## [1.2.0] - 2025-10-28
 
 ### Added
@@ -16,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2025-10-26
 
 ### Added
-- **`port_check.sh`**: A comprehensive script to check for open ports on a target using `nmap` and `netat-openbsd`. It supports IPv4, IPv6, and domain targets.
+- **`port_check.sh`**: A comprehensive script to check for open ports on a target using `nmap` and `netcat-openbsd`. It supports IPv4, IPv6, and domain targets.
 - **`ipinfo.sh`**: Added a dependency check to ensure `curl` and `bc` are installed before running.
 
 ### Changed
