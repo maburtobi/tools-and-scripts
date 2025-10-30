@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-10-28
+
+### Added
+- **`port_check.sh`**: Added a dependency check for `bc`.
+
+### Changed
+- **`ipt.sh`**: Refactored the script into a single, powerful toolkit. Instead of creating multiple files, it now accepts arguments (`show`, `shownum`, `save`) and an optional `v6` flag to manage `iptables` and `ip6tables` rules efficiently. The new script is more readable, maintainable, and includes a help guide.
+
 ## [1.1.0] - 2025-10-26
 
 ### Added

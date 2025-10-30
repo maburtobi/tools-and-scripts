@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Coprehensive Open Port Check Script using nmap and nc
+# Comprehensive Open Port Check Script using nmap and nc
 
-timer_start=$(date +%s%N)
+START_TIME_NS=$(date +%s%N)
 
 # Colors for output
 RED='\033[0;31m'
@@ -67,6 +67,10 @@ check_dependencies() {
     
     if ! command -v dig &> /dev/null; then
         missing_tools+=("dig")
+    fi
+    
+    if ! command -v bc &> /dev/null; then
+        missing_tools+=("bc")
     fi
     
     if [ ${#missing_tools[@]} -ne 0 ]; then

@@ -39,6 +39,7 @@ A comprehensive script to check for open TCP and UDP ports on a target host. It 
 - nmap
 - dig
 - netcat (OpenBSD variant)
+- bc
 
 **Usage:**
 ```sh
@@ -59,4 +60,28 @@ Examples:
   ./port_check.sh --port 80,443 1.1.1.1
   ./port_check.sh -p 22,80,443 2606:4700:4700::1111
   ./port_check.sh -v -p 80,443 example.com
+```
+
+---
+
+## ipt.sh
+
+A script to simplify viewing and managing `iptables` and `ip6tables` rules.
+
+**Prequisites:**
+- iptables
+- ip6tables
+
+**Usage:**
+```sh
+Usage: ./ipt.sh {show|shownum|save} [v6]
+
+Commands:
+  show      List all rules for iptables (or ip6tables if 'v6' is specified).
+  shownum   List all rules in numeric format for iptables (or ip6tables if 'v6' is specified).
+  save      Save rules for iptables (or ip6tables if 'v6' is specified).
+  help      Show this help message.
+
+Options:
+  v6        Use ip6tables instead of iptables.
 ```
