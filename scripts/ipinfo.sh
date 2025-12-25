@@ -45,7 +45,15 @@ wait)
 
 # Format the concatenated JSON objects into a valid JSON array
 json_output=$(echo "$output" | sed 's/}{/},{/g')
-echo "[$json_output]" | jq '.[] | {ip, hostname, city, region, org, timezone} + (if has("anycast") then {anycast} else {} end)'
+json_array="[$json_output]"
+
+# Print the main JSON output, now including the country
+echo "$json_array" | jq '.[] | {ip, hostname, city, region, country, org, timezone} + (if has("anycast") then {anycast} else {} end)'
+
+# Print the country summary
+echo
+echo "Country Summary:"
+echo "$json_array" | jq -r 'map(.country) | group_by(.) | .[] | "\(.[0]): \(length)"'
 
 # End time capture and calculate elapsed time (output to stderr)
 END_TIME_NS=$(date +%s%N)
