@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check for required commands
-for cmd in curl bc; do
+for cmd in curl bc jq; do
   if ! command -v "$cmd" &> /dev/null; then
     echo "Error: Required command '$cmd' is not installed." >&2
     exit 1
@@ -45,7 +45,7 @@ wait)
 
 # Format the concatenated JSON objects into a valid JSON array
 json_output=$(echo "$output" | sed 's/}{/},{/g')
-echo "[$json_output]"
+echo "[$json_output]" | jq '.[] | {ip, hostname, city, region, org, timezone} + (if has("anycast") then {anycast} else {} end)'
 
 # End time capture and calculate elapsed time (output to stderr)
 END_TIME_NS=$(date +%s%N)
