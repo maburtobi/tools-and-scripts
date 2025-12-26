@@ -3,11 +3,12 @@ Automate and shorten the engineering time
 
 ## ipinfo.sh
 
-Fetches public IP information from ipinfo.io for one or more IPs.
+Fetches public IP information from ipinfo.io for one or more IPs. The output includes a JSON object for each IP with details like hostname, city, region, country, and more. At the end, it provides a summary of the countries found.
 
 **Prequisites:**
 - curl
 - bc
+- jq
 
 **Usage:**
 ```sh
@@ -24,6 +25,35 @@ Examples:
   ./ipinfo.sh 8.8.8.8
   ./ipinfo.sh 8.8.8.8 1.1.1.1
   ./ipinfo.sh 8.8.8.8,1.1.1.1
+```
+
+**Output:**
+```json
+[
+  {
+    "ip": "8.8.8.8",
+    "hostname": "dns.google",
+    "city": "Mountain View",
+    "region": "California",
+    "country": "US",
+    "org": "AS15169 Google LLC",
+    "timezone": "America/Los_Angeles"
+  },
+  {
+    "ip": "1.1.1.1",
+    "hostname": "one.one.one.one",
+    "city": "South Brisbane",
+    "region": "Queensland",
+    "country": "AU",
+    "org": "AS13335 Cloudflare, Inc.",
+    "timezone": "Australia/Brisbane",
+    "anycast": true
+  }
+]
+
+Country Summary:
+AU: 1
+US: 1
 ```
 
 ---
