@@ -271,21 +271,21 @@ parse_arguments() {
     echo ""
 }
 
-# Function to run nmap scan (combined TCP and UDP)
+# Function to run nmap TCP scan
 run_nmap_scan() {
     local target=$1
     local target_type=$2
     local ports=$3
     
-    echo -e "${PURPLE}### nmap combined TCP/UDP scan for $target_type $target ${NC}"
+    echo -e "${PURPLE}### nmap TCP scan for $target_type $target ${NC}"
     
     local nmap_cmd="nmap"
     if [[ $target_type == "IPv6" ]]; then
         nmap_cmd="nmap -6"
     fi
     
-    # Combined TCP and UDP scan with sudo
-    nmap_cmd="sudo $nmap_cmd -sT -sU -Pn --reason -p $ports $target"
+    # TCP scan with sudo
+    nmap_cmd="sudo $nmap_cmd -sT -Pn --reason -p $ports $target"
     
     echo -e "${YELLOW}Running: $nmap_cmd${NC}"
     echo ""
@@ -299,25 +299,20 @@ run_nmap_scan() {
     echo ""
 }
 
-# Function to run nc scan
-run_nc_scan() {
+# Function to run nc TCP scan
+run_nc_tcp_scan() {
     local target=$1
     local target_type=$2
     local ports=$3
-    local protocol=$4
     
-    echo -e "${PURPLE}### $NC_COMMAND $protocol ports checking ${NC}"
+    echo -e "${PURPLE}### $NC_COMMAND TCP ports checking ${NC}"
 
     local port_list=($(echo "$ports" | tr ',' ' '))
     
     for port in "${port_list[@]}"; do
         port=$(echo "$port" | xargs)
         
-        local command_nc_full="$NC_COMMAND -zv"
-        if [[ $protocol == "UDP" ]]; then
-            command_nc_full="$NC_COMMAND -zvu"
-        fi
-        command_nc_full="$command_nc_full -w 4 $target $port"
+        local command_nc_full="$NC_COMMAND -zv -w 4 $target $port"
         
         echo -e "${YELLOW}Run: $command_nc_full${NC}"
         $command_nc_full
@@ -353,12 +348,11 @@ main() {
         echo -e "${GREEN}## Starting scans for IPv4: $IPV4_TARGET ${NC}"
         echo ""
         
-        # Combined TCP/UDP nmap scan
+        # TCP nmap scan
         run_nmap_scan "$IPV4_TARGET" "IPv4" "$PORTS"
         
-        # Individual TCP and UDP nc scans
-        run_nc_scan "$IPV4_TARGET" "IPv4" "$PORTS" "TCP"
-        run_nc_scan "$IPV4_TARGET" "IPv4" "$PORTS" "UDP"
+        # TCP nc scan
+        run_nc_tcp_scan "$IPV4_TARGET" "IPv4" "$PORTS"
     fi
     
     # Run scans for IPv6 if provided
@@ -367,12 +361,11 @@ main() {
         echo -e "${GREEN}## Starting scans for IPv6: $IPV6_TARGET ${NC}"
         echo ""
         
-        # Combined TCP/UDP nmap scan
+        # TCP nmap scan
         run_nmap_scan "$IPV6_TARGET" "IPv6" "$PORTS"
         
-        # Individual TCP and UDP nc scans
-        run_nc_scan "$IPV6_TARGET" "IPv6" "$PORTS" "TCP"
-        run_nc_scan "$IPV6_TARGET" "IPv6" "$PORTS" "UDP"
+        # TCP nc scan
+        run_nc_tcp_scan "$IPV6_TARGET" "IPv6" "$PORTS"
     fi
 }
 

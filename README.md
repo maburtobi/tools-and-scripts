@@ -60,7 +60,7 @@ US: 1
 
 ## port_check
 
-A tool to check for open TCP and UDP ports on a target host. Available as a shell script or a self-contained Go program.
+A tool to check for open TCP ports on a target host. Available as a shell script or a self-contained Go program.
 
 ### port_check.sh
 
