@@ -27,6 +27,12 @@ go.work.sum
 # env file
 .env
 
+# Python / uv
+__pycache__/
+*.py[cod]
+.venv/
+uv.lock
+
 # Editor/IDE
 # .idea/
 # .vscode/

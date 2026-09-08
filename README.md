@@ -56,11 +56,22 @@ AU: 1
 US: 1
 ```
 
+### ipinfo.py (uv)
+
+Pure-Python version runnable with `uv` (auto-provisions Python and `requests`; no `curl`, `bc`, or `jq` needed).
+
+**Usage:**
+```sh
+uv run ipinfo.py 8.8.8.8
+uv run ipinfo.py 8.8.8.8 1.1.1.1
+uv run ipinfo.py 8.8.8.8,1.1.1.1
+```
+
 ---
 
 ## port_check
 
-A tool to check for open TCP ports on a target host. Available as a shell script or a self-contained Go program.
+A tool to check for open TCP ports on a target host. Available as a shell script, a self-contained Go program, or a `uv`-runnable Python script.
 
 ### port_check.sh
 
@@ -91,6 +102,19 @@ Examples:
   ./port_check.sh --port 80,443 1.1.1.1
   ./port_check.sh -p 22,80,443 2606:4700:4700::1111
 ```
+
+### port_check.py (uv)
+
+Pure standard-library Python port runnable with `uv` — no `nmap`, `netcat`, `dig`, or `bc` needed. Supports IPv4, IPv6, domain targets, and comma-separated port lists or ranges (`1-1024`).
+
+**Usage:**
+```sh
+uv run port_check.py -p 80,443 example.com
+uv run port_check.py --port 80,443 1.1.1.1
+uv run port_check.py -p 22,80,443 2606:4700:4700::1111
+```
+
+Output reports open ports per resolved target (TCP and UDP scans). Note: UDP connect-mode scanning is unreliable. A timeout does not definitively mean a port is closed.
 
 ### port_check.go
 

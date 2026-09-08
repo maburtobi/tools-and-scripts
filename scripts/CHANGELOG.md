@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-09-08
+
+### Added
+- **`port_check.py`**: A Python port of `port_check.sh`/`port_check.go` runnable with `uv run`. Pure standard library (no `nmap`, `netcat`, `dig`, or `bc` needed); supports IPv4, IPv6, domain targets, and comma-separated port lists or ranges.
+- **`ipinfo.py`**: A Python port of `ipinfo.sh` runnable with `uv run`. Uses `requests` (auto-managed by uv) with concurrent fetches, identical field selection, and country summary.
+
+### Changed
+- **`port_check.sh`**: Relaxed netcat detection to accept OpenBSD-compatible `nc` variants (e.g., macOS `/usr/bin/nc`) that advertise Zero-I/O (`-z`) mode, instead of requiring the literal `OpenBSD` string in `nc -h`.
+
 ## [1.3.1] - 2026-01-31
 
 ### Changed
