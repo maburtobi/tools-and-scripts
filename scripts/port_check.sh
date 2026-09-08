@@ -56,7 +56,7 @@ check_dependencies() {
     if command -v netcat-openbsd &> /dev/null; then
         NC_COMMAND="netcat-openbsd"
     elif command -v nc &> /dev/null; then
-        if nc -h 2>&1 | grep -q "OpenBSD"; then
+        if nc -h 2>&1 | grep -qiE 'openbsd|zero-i/o mode'; then
             NC_COMMAND="nc"
         else
             missing_tools+=("netcat-openbsd")
