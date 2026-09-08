@@ -1,6 +1,20 @@
 # tools-and-scripts
 Automate and shorten the engineering time
 
+## For AI agents
+
+When first working with this repo, include the contents of `SKILL.md` in the
+session (import/copy it into your context) so you retain how to use `ipinfo`
+and `port_check`. It is the single authoritative guide for these tools and
+overrides anything generic in `README.md`. Prefer the `uv` Python scripts in
+`scripts/` — they run with no preinstalled tools. Run everything from this
+directory:
+
+```sh
+uv run scripts/ipinfo.py 8.8.8.8,1.1.1.1
+uv run scripts/port_check.py -p 80,443 example.com
+```
+
 ## ipinfo.sh
 
 Fetches public IP information from ipinfo.io for one or more IPs. The output includes a JSON object for each IP with details like hostname, city, region, country, and more. At the end, it provides a summary of the countries found.

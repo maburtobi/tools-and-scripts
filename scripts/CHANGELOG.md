@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **`port_check.sh`**: Relaxed netcat detection to accept OpenBSD-compatible `nc` variants (e.g., macOS `/usr/bin/nc`) that advertise Zero-I/O (`-z`) mode, instead of requiring the literal `OpenBSD` string in `nc -h`.
 
+### Documentation
+- Added **`SKILL.md`** with skill-style frontmatter (`name`, `description`) so the tool usage guide is loadable on demand as a skill.
+- **`README.md`**: Added a "For AI agents" section instructing agents to import `SKILL.md` into context and prefer the `uv` Python scripts.
+
 ## [1.3.1] - 2026-01-31
 
 ### Changed
