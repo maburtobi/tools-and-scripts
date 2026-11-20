@@ -3,8 +3,8 @@ Automate and shorten the engineering time
 
 ## For AI agents
 
-When first working with this repo, include the contents of `SKILL.md` in the
-session (import/copy it into your context) so you retain how to use `ipinfo`
+When first working with this repo, load the `tools-and-scripts` skill
+(`.claude/skills/tools-and-scripts/SKILL.md`) so you retain how to use `ipinfo`
 and `port_check`. It is the single authoritative guide for these tools and
 overrides anything generic in `README.md`. Prefer the `uv` Python scripts in
 `scripts/` — they run with no preinstalled tools. Run everything from this

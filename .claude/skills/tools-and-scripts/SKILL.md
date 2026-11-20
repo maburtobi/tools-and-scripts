@@ -3,7 +3,7 @@ name: tools-and-scripts
 description: How to use the networking utilities in this repo (ipinfo and port_check). Use when asked to look up IP/ASN information from ipinfo.io, or to check open ports on an IP, IPv6, or domain. Provides uv run invocations that need no preinstalled tools.
 ---
 
-# SKILL.md — tools-and-scripts
+# SKILL.md -- tools-and-scripts
 
 Guidance for AI agents using the network tools in this repository.
 
@@ -29,14 +29,14 @@ multiple implementations: a shell script (`scripts/*.sh`), and most have a
 
 ### ipinfo
 
-- `scripts/ipinfo.sh` — Bash; requires `curl`, `bc`, `jq`.
-- `scripts/ipinfo.py` — `uv`-managed Python; requires `requests` (auto-installed). **Preferred.**
+- `scripts/ipinfo.sh` -- Bash; requires `curl`, `bc`, `jq`.
+- `scripts/ipinfo.py` -- `uv`-managed Python; requires `requests` (auto-installed). **Preferred.**
 
 ### port_check
 
-- `scripts/port_check.sh` — Bash; requires `nmap`, `dig`, OpenBSD/BSD `nc`, `bc`. TCP-only.
-- `scripts/port_check.go` — self-contained Go; build with `go build`, run with `go run`.
-- `scripts/port_check.py` — pure stdlib Python. **Preferred for agents, no dependencies.**
+- `scripts/port_check.sh` -- Bash; requires `nmap`, `dig`, OpenBSD/BSD `nc`, `bc`. TCP-only.
+- `scripts/port_check.go` -- self-contained Go; build with `go build`, run with `go run`.
+- `scripts/port_check.py` -- pure stdlib Python. **Preferred for agents, no dependencies.**
 
 ## Recommendations for agents
 
@@ -61,7 +61,7 @@ uv run scripts/port_check.py -p 80,443 example.com
   The `.py` implementations avoid these entirely.
 - **Sandboxed shells**: `uv` needs to write its cache. If `uv run` fails with
   `Operation not permitted` on a cache lock file (`.git` in the cache dir), the
-  shell is running in a sandbox — run `uv run` from a normal terminal instead.
+  shell is running in a sandbox -- run `uv run` from a normal terminal instead.
 
 ## Conventions
 
